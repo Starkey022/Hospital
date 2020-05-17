@@ -1,0 +1,39 @@
+<!-- Heredamos de la clase base -->
+{% extends 'base.html' %}
+<!-- Cargamos los archivos estaticos -->
+{% load static %}
+
+<!-- Declaramos el bloque titulo -->
+{% block titulo %}
+  Personal
+{% endblock titulo %}
+
+<!-- Declaramos el bloque imagen -->
+{% block imagen %}
+  {% static 'img/personal.jpg' %}
+{% endblock imagen %}
+
+<!-- Declaramos el bloque titulo_principal -->
+{% block titulo_principal %}
+  Personal del Hospital
+{% endblock titulo_principal %}
+
+<!-- Declaramos el bloque barra_busqueda-->
+{% block barra_busqueda %}
+{% endblock barra_busqueda %}
+
+<!-- Declaramos el bloque contenido -->
+{% block contenido %}
+    <h2>Realice las modificaciones necesarias:</h2>    
+    <br>
+    <!-- Establecemos para el metodo post -->
+    <form method="POST">
+      <!-- Establecemos para el metodo post -->
+      {% csrf_token %}  
+      <table>
+          {{ formularioInicial.as_table }}
+      </table>
+      <br>
+      <button type="submit" class="boton btn-success">Actualizar</button>
+    </form>
+{% endblock contenido %}

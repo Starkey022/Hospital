@@ -1,0 +1,40 @@
+<!-- Heredamos de la clase base -->
+{% extends 'base.html' %}
+<!-- Cargamos los archivos estaticos -->
+{% load static %}
+
+<!-- Declaramos el bloque titulo -->
+{% block titulo %}
+  Expediente
+{% endblock titulo %}
+
+<!-- Declaramos el bloque imagen -->
+{% block imagen %}
+  {% static 'img/expediente.jpg' %}
+{% endblock imagen %}
+
+<!-- Declaramos el bloque titulo_principal -->
+{% block titulo_principal %}
+  Expediente
+{% endblock titulo_principal %}
+
+<!-- Declaramos el bloque barra_busqueda-->
+{% block barra_busqueda %}
+{% endblock barra_busqueda %}
+
+<!-- Declaramos el bloque contenido -->
+{% block contenido %}
+    <h3>Para agregar un expediente nuevo, rellene los datos:</h3>
+    <br>
+    <!-- Para el metodo POST -->
+    <form method="POST">
+        {% csrf_token %}
+        <!-- Establecemos el formulario -->
+        <table>
+          {{ formularioEx.as_table }}
+        </table>
+        <br>
+        <!-- Boton para crear el expediente. (Mandar los datos del formulario) -->
+        <button type="submit" class="boton btn-success">Crear</button>
+    </form>       
+{% endblock contenido %}

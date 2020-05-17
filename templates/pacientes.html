@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %}
+  Pacientes
+{% endblock titulo %}
+
+{% block imagen %}
+  {% static 'img/pacientes.jpg' %}
+{% endblock imagen %}
+
+{% block titulo_principal %}
+  Pacientes
+{% endblock titulo_principal %}
+
+{% block contenido %}
+  <form method="POST">
+    {{ formularioPa.as_p }}
+    {% csrf_token %}
+    <button type="submit">Crear</button>
+  </form>
+{% endblock contenido %}

@@ -1,0 +1,64 @@
+<!-- Heredamos de la clase base -->
+{% extends 'base.html' %}
+<!-- Cargamos los archivos estaticos -->
+{% load static %}
+
+<!-- Declaramos el bloque titulo -->
+{% block titulo %}
+  Pacientes
+{% endblock titulo %}
+
+<!-- Declaramos el bloque imagen -->
+{% block imagen %}
+  {% static 'img/pacientes.jpg' %}
+{% endblock imagen %}
+
+<!-- Declaramos el bloque titulo_principal -->
+{% block titulo_principal %}
+  Pacientes
+{% endblock titulo_principal %}
+
+<!-- Declaramos el bloque barra_busqueda-->
+{% block barra_busqueda %}
+{% endblock barra_busqueda %}
+
+<!-- Declaramos el bloque contenido -->
+{% block contenido %}
+    <h2>Lista de pacientes atendidos en el hospital</h2>
+    <br>
+    <!-- Verificamos que extista pacientes. (Si es que existen pacientes.) -->
+    {% if pacientes %}
+
+      <!---    -->
+      <table align="center" class="table table-responsive">
+        <thead>
+          <tr align="center">
+            <th width="150">Nombre</th>
+            <th width="150">Apellido</th>
+            <th width="130">Habitacion</th>
+            <th width="180">Doctor</th>
+            <th width="350">Opciones</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Listamos el personal -->    
+          {% for paciente in pacientes %}
+          <tr align="center" height="40">
+              <td>{{paciente.nombrePa}} </td>
+              <td>{{paciente.apellidoPPa}} </td>
+              <td>{{paciente.habitacion}} </td>
+              <td>{{paciente.Doctor}} </td>
+              <td><a href="/pacientee/{{ paciente.id }}" class="btn btn-primary">Editar</a></td>
+              <td><a href="/pacienteb/{{ paciente.id }}" class="btn btn-primary" onClick="return confirm('¿Seguro que quieres borrar a {{paciente.nombrePa}}?');">Borrar</a></td>
+              <td><a href="/expediente/{{ paciente.id }}" class="btn btn-primary">Expediente</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    <!-- Si no existe pacientel, mandamos un msj. (De que no existen pacientes.)-->
+    {% else %}
+        <p>Actualmente no hay pacientes registrados en el hospital</p>
+    {% endif %}
+{% endblock contenido %}

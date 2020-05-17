@@ -1,0 +1,58 @@
+<!-- Heredamos de la clase base -->
+{% extends 'base.html' %}
+<!-- Cargamos los archivos estaticos -->
+{% load static %}
+
+<!-- Declaramos el bloque titulo -->
+{% block titulo %}
+  Personal
+{% endblock titulo %}
+
+<!-- Declaramos el bloque imagen -->
+{% block imagen %}
+  {% static 'img/personal.jpg' %}
+{% endblock imagen %}
+
+<!-- Declaramos el bloque titulo_principal -->
+{% block titulo_principal %}
+  Personal del Hospital
+{% endblock titulo_principal %}
+
+<!-- Declaramos el bloque barra_busqueda-->
+{% block barra_busqueda %}
+{% endblock barra_busqueda %}
+
+<!-- Declaramos el bloque contenido -->
+{% block contenido %}
+    <h2>Lista del personal que labora en el hospital</h2>    
+    <br>
+        <!-- Verificamos que extista personalH. (Si es que existe personal trabajando) -->
+        {% if personalH %}
+            <!-- <table align="center" class="table table-responsive"> -->
+            <table align="center">
+                <thead>
+                    <tr align="center">
+                    <th width="150">Nombre</th>
+                    <th width="150">Apellido</th>
+                    <th width="150">Tipo</th>
+                    <th width="300">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Listamos el personal -->    
+                    {% for personal in personalH %}
+                    <tr align="center" height="40">
+                        <td>{{personal.nombrePH}} </td>
+                        <td>{{personal.apellidoPPH}} </td>
+                        <td>{{personal.tipoPH.capitalize}} </td>
+                        <td><a href="/personale/{{ personal.id }}" class="btn btn-success">Editar</a>
+                            <a href="/personalb/{{ personal.id }}" class="btn btn-success" onClick="return confirm('¿Seguro que quieres borrar a {{personal.nombrePH}}?');">Borrar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        <!-- Si no existe personalH, mandamos un msj. (De que no existe personal trabajando)-->
+        {% else %}
+            <p>Actualmente no hay personal laborando en el hospital</p>
+        {% endif %}
+{% endblock contenido %}

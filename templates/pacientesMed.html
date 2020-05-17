@@ -1,0 +1,57 @@
+<!-- Heredamos de la clase base -->
+{% extends 'base.html' %}
+<!-- Cargamos los archivos estaticos -->
+{% load static %}
+
+<!-- Declaramos el bloque titulo -->
+{% block titulo %}
+  Mis Pacientes
+{% endblock titulo %}
+
+<!-- Declaramos el bloque imagen -->
+{% block imagen %}
+  {% static 'img/pacientes.jpg' %}
+{% endblock imagen %}
+
+<!-- Declaramos el bloque titulo_principal -->
+{% block titulo_principal %}
+  Mis Pacientes
+{% endblock titulo_principal %}
+
+<!-- Declaramos el bloque barra_busqueda-->
+{% block barra_busqueda %}
+{% endblock barra_busqueda %}
+
+<!-- Declaramos el bloque contenido -->
+{% block contenido %}
+    <h2>Mis pacientes atendidos son:</h2>
+    <br>
+    <!-- Verificamos que extista pacientes. (Si es que existen pacientes.) -->
+    {% if paciente_list %}
+      <table align="center" class="table table-responsive">
+        <thead>
+          <tr align="center">
+            <th width="150">Nombre</th>
+            <th width="150">Apellido</th>
+            <th width="130">Habitacion</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Listamos el personal -->    
+          {% for paciente in paciente_list %}
+          <tr align="center" height="40">
+              <td>{{paciente.nombrePa}} </td>
+              <td>{{paciente.apellidoPPa}} </td>
+              <td>{{paciente.habitacion}} </td>
+              <td><a href="/expediente/{{ paciente.id }}" class="btn btn-primary">Expediente</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    <!-- Si no existe pacientel, mandamos un msj. (De que no existen pacientes.)-->
+    {% else %}
+        <p>Actualmente no atiende a algun paciente</p>
+    {% endif %}
+{% endblock contenido %}
